@@ -1,25 +1,19 @@
 /// <reference types="cypress" />
 
-import { faker } from "@faker-js/faker"
-
 class CadastroPage {
-    get #firstName() { return cy.get('[data-testid="firstName"]')}
-    get #lastName() { return cy.get('[data-testid="lastName"]')}
-    get #phoneNumber() {return cy.get('[data-testid="phone"]')}
-    get #emailAddress() {return cy.get(':nth-child(7) > .css-175oi2r > [data-testid="email"]')}
-    get #password() {return cy.get(':nth-child(8) > .css-175oi2r > [data-testid="password"]')}
-    get #reenterPassword() {return cy.get(':nth-child(8) > .css-175oi2r > [data-testid="password"]')}
 
-    cadastro(firstName, lastName, phoneNumber, emailAddress, password, reenterPassword){
-        firstName = faker.person.firstName()
-        lastName = faker.person.lastName()
-        phoneNumber = faker.number.phoneNumber()
-        emailAddress = faker.internet.email()
-        password = "1234"
-        reenterPassword = "1234"
+    preencherDados(){
+        const randomEmail = Math.random().toString(36).substring(2,15)+"@gmail.com"
+        cy.get('[data-testid="firstName"]').type('Lucas')
+        cy.get('[data-testid="lastName"]').type('Schmitt')
+        cy.get('[data-testid="phone"]').type('11987654321')
+        cy.get(':nth-child(7) > .css-175oi2r > [data-testid="email"]').type(randomEmail)
+        cy.get(':nth-child(8) > .css-175oi2r > [data-testid="password"]').type('1234')
+        cy.get('[data-testid="repassword"]').type('1234')
+        cy.get('[data-testid="create"]').click()
     }
 }
 
-module.exports = new CadastroPage();
+export default new CadastroPage();
     
     
