@@ -17,11 +17,11 @@ jobs:
     - uses: actions/setup-node@v6
       with:
         node-version: 24
-    - name: Cypress run    
+    - run: npm install
+    - run: npm start &
     - uses: cypress-io/github-action@v6
       continue-on-error: true
       with: 
-        install-command: npm install
         browser: chrome
     - name: Publish Report
       uses: peaceiris/actions-gh-pages@v4
