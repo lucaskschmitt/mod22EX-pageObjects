@@ -1,0 +1,31 @@
+name: MOD22EX
+
+on: 
+  push:
+    branches: [main]
+
+  workflow_dispatch:
+
+jobs:
+
+  test: 
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v5
+    - uses: actions/setup-node@v6
+      with:
+        node-version: 24
+    - name: Cypress run    
+    - uses: cypress-io/github-action@v6
+      continue-on-error: true
+      with: 
+        install-command: npm install
+        browser: chrome
+    - name: Publish Report
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./public
+        
