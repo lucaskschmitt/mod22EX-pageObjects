@@ -3,13 +3,14 @@ const { defineConfig } = require("cypress");
 module.exports = defineConfig({
   e2e: {
     baseUrl: 'http://lojaebac.ebaconline.art.br/',
-    reporter: "mochawesome",
-    "reporterOptions": {
-      "reportDir": "mochawesome-report",
-      "overwrite": false,
-      "reportFilename": "index.html",
-      "html": true,
-      "json": false
+    reporter: "cypress-mochawesome-reporter",
+    reporterOptions: {
+      reportDir: "mochawesome-report",
+      charts: true,
+      reportPageTitle: "Cypress Test Report",
+      embeddedScreenshots: true,
+      inlineAssets: true,
+      saveAllAttempts: false,
     },
     setupNodeEvents(on, config) {
       require('cypress-mochawesome-reporter/plugin')(on);
